@@ -130,11 +130,9 @@ To spin up the containerized production-grade environment:
 We leverage the modern **native Node.js test runner** which executes tests with lightning-fast speeds and zero external testing frameworks.
 
 To run the server startup and health probe diagnostics checks:
-
 ```bash
 npm test
 ```
-
 ---
 
 ## 🛡️ DevOps Best Practices Implemented
