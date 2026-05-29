@@ -1,48 +1,58 @@
-# 🚀 DevOps Control Center: Express & Vanilla JS Application Suite
+# 🚀 Neon Strike - Tic-Tac-Toe Ultimate
 
-Welcome! This is a production-grade, highly-visual **DevOps Control Center** built using **Node.js (Express)** on the backend and modern **Vanilla HTML/CSS/JS** on the frontend. 
+Welcome! **Neon Strike** is a dedicated, visually spectacular, premium **standalone Tic-Tac-Toe application** built using **Node.js (Express)** on the backend and modern **Vanilla HTML/CSS/JS** on the frontend. 
 
-It is designed specifically as an interactive, comprehensive application for DevOps Engineers to demonstrate local microservices, containerization best practices, monitoring setups, and native automated testing.
+It is designed to deliver a visually breathtaking user experience, featuring customizable neon themes, procedurally synthesized audio effects, a smart minimax AI, and full local scoreboards and streak diagnostics.
 
 ---
 
 ## 🌟 Key Features
 
-1. **📊 Real-time System Monitor**:
-   - Animated circular telemetry gauges for **CPU Utilization** (simulated load with random walks) and **Memory RSS/Heap allocation** (real-time process memory).
-   - Live **Network Throughput** (RX/TX speeds) trackers.
-   - **live_stdout_stream.log**: A scrollable, colorized developer terminal rendering live server logs dynamically streamed from the host backend.
+1. **🎨 Rich Visual Aesthetics & Atmos Theme Engine**:
+   - Built a sleek glassmorphic container layout featuring `backdrop-filter: blur(16px)` and subtle glowing neon borders.
+   - Built a customizable **theme engine** with four pre-loaded premium atmospheric presets:
+     - **Cyberpunk Neon** (Dark Violet background, Cyan X, Pink O)
+     - **Forest Emerald** (Deep Green background, Mint X, Gold O)
+     - **Cosmic Abyss** (Pitch Space Blue background, Purple X, Nebula Blue O)
+     - **Sunset Glow** (Charcoal background, Coral Orange X, Sunshine Gold O)
+   - Created beautiful animations for hovering tiles, SVG path drawing on placements, and dynamic pulsing glows for the winning sequence.
+   - Integrated an **SVG strike-through overlay** that draws a smooth neon line across the physical winning tiles dynamically.
 
-2. **📋 DevOps Kanban Task Board**:
-   - Create, list, transition, and delete tasks in a classic backlog interface.
-   - Categorize by `Docker`, `Monitoring`, `CI/CD`, `Kubernetes`, `Security`, etc.
-   - Assign priorities (`High`, `Medium`, `Low`) to mimic actual production sprints.
-   - **Persisted Database**: Tasks are saved locally to `tasks.json` so states are preserved across restarts.
+2. **🎵 Procedural Audio Engine (Web Audio API)**:
+   - Synthesizes modern, low-latency audio effects **procedurally using the Web Audio API**.
+   - Requires zero external audio file downloads (works instantly and 100% offline).
+   - Generates distinct tones:
+     - Pluck tone on X placement.
+     - Warm synth on O placement.
+     - Ascending major key arpeggio on Victory.
+     - Descending slide on Defeat.
+     - Twin dual-tone beeps on Draw.
+     - High-frequency laser sweep on Match Restart.
+   - Includes a persistent mute/unmute control inside the header.
 
-3. **🎮 Downtime Sandbox (Tic-Tac-Toe)**:
-   - Challenge the smart System AI or play locally against another user.
-   - Built-in **Minimax Algorithm** guarantees the AI will play optimally, making it extremely difficult (or impossible!) to defeat.
-   - Visual board with glowing, pulsing hover states, scoring panels, and draw evaluations.
+3. **🤖 Intelligent AI Mechanics**:
+   - Implemented three distinct **AI Difficulty Modes**:
+     - **Easy**: 45% random plays, 55% perfect play.
+     - **Medium**: 25% random plays, 75% perfect play. Offers a balanced casual match.
+     - **Perfect**: 100% unbeatable minimax AI (guarantees a win or a draw).
+   - **Local PVP Mode**: Allows two local players to compete head-to-head with editable, reactive custom usernames.
 
-4. **🔬 API Diagnostics Explorer**:
-   - An interactive console to test raw endpoints.
-   - Inspect responses for `/health`, `/metrics`, `/api/tasks`, and `/api/system` directly inside the browser UI, displaying headers, response latencies, and pretty-printed JSON payloads.
+4. **📊 Diagnostics & Leaderboard Persistence**:
+   - Track wins, losses, stalemates, win ratios, and maximum consecutive winning streaks dynamically.
+   - All statistics, player preferences (themes, names, mute state, difficulties) persist across browser refreshes via `localStorage`.
+   - Dedicated "Reset Metrics" button to reset the database.
 
-5. **📈 Production DevOps Integrations**:
-   - **Prometheus Metrics (`/metrics`)**: Exposes structured metrics (`http_requests_total`, `node_memory_usage_bytes`, `node_uptime_seconds`, and `tasks_total`) ready to be scraped by standard Prometheus scrapers.
-   - **Liveness & Readiness Probes (`/health`)**: Full operational health status probe.
-   - **Multi-stage Dockerfile**: Security-conscious rootless setup running as `node` user in `node:26-alpine`.
-   - **Orchestrated Monitoring stack**: Launch the app alongside a Prometheus monitoring server with a single command.
-   - **CI/CD Workflow**: Built-in GitHub Actions configurations to validate testing and container builds.
+5. **🎉 Canvas Win Celebration**:
+   - Renders animated multicoloured floating confetti directly inside an HTML5 Canvas when Player 1 defeats the System AI.
 
 ---
 
 ## 🛠️ Tech Stack
 
 - **Backend**: Node.js (v26.0.0+), Express.js, Morgan (structured request logger)
-- **Frontend**: Single-Page Dashboard (HTML5, Vanilla CSS Grid/Flexbox, Custom variables, Glassmorphism design, Vanilla ES6 JavaScript)
+- **Frontend**: Single-Page Dashboard (HTML5, Vanilla CSS Grid/Flexbox, Custom variables, Glassmorphism design, Vanilla ES6 JavaScript, Web Audio API, Canvas Confetti)
 - **Testing**: Native Node.js Test Runner (`node:test` and `node:assert`)
-- **Containers & Orchestration**: Docker, Docker Compose, Prometheus Server
+- **Containers**: Docker (secure Alpine multi-stage production setup)
 
 ---
 
@@ -50,24 +60,22 @@ It is designed specifically as an interactive, comprehensive application for Dev
 
 ```text
 ├── package.json          # Node.js dependencies, environment, and scripts
-├── server.js             # Core Express server, API routers, and metrics generators
-├── Dockerfile            # Multi-stage production-ready secure Docker config
-├── docker-compose.yml    # Main orchestration composer (App + Prometheus)
-├── prometheus.yml        # Telemetry scraper settings for Prometheus
+├── server.js             # Lightweight Express server and static assets router
+├── Dockerfile            # Secure Alpine multi-stage production Docker config
+├── docker-compose.yml    # Main orchestration composer (exposes Tic-Tac-Toe App)
 ├── .dockerignore         # Docker context exclusion filter
 ├── .gitignore            # Git exclusion filter
 ├── .github/
 │   └── workflows/
 │       └── ci.yml        # GitHub Actions continuous integration workflow
 ├── public/               # Frontend Assets
-│   ├── index.html        # Single-page control center html UI
+│   ├── index.html        # Glassmorphic single-page game dashboard
 │   ├── css/
-│   │   └── style.css     # Premium dark/light glassmorphism styling
+│   │   └── style.css     # Premium atmospheric visual styling and variables
 │   └── js/
-│       ├── app.js        # Telemetry gauges, logs, Kanban CRUD, and API console
-│       └── tictactoe.js  # Tic-Tac-Toe Minimax AI logic
+│       └── tictactoe.js  # Gameplay loop, Minimax AI, Audio engine, and Stats tracker
 └── tests/
-    └── server.test.js    # Integration & API tests (using native Node runner)
+    └── server.test.js    # Native backend server integration tests
 ```
 
 ---
@@ -92,15 +100,14 @@ It is designed specifically as an interactive, comprehensive application for Dev
    ```
 
 4. **Access the application**:
-   - **Control Center Dashboard**: [http://localhost:3000](http://localhost:3000)
+   - **Play Game**: [http://localhost:3000](http://localhost:3000)
    - **Health Checks**: [http://localhost:3000/health](http://localhost:3000/health)
-   - **Prometheus Metrics**: [http://localhost:3000/metrics](http://localhost:3000/metrics)
 
 ---
 
 ### Method 2: Docker Compose (The DevOps Orchestration)
 
-To spin up the entire production-grade monitoring environment containing the Node app AND a scraping Prometheus server:
+To spin up the containerized production-grade environment:
 
 1. **Launch container stack**:
    ```bash
@@ -109,8 +116,7 @@ To spin up the entire production-grade monitoring environment containing the Nod
 
 2. **Verify services**:
    - Check container health status: `docker compose ps`
-   - **Control Center Dashboard**: [http://localhost:3000](http://localhost:3000)
-   - **Prometheus Query UI**: [http://localhost:9090](http://localhost:9090)
+   - **Play Game**: [http://localhost:3000](http://localhost:3000)
 
 3. **Stop container stack**:
    ```bash
@@ -121,29 +127,13 @@ To spin up the entire production-grade monitoring environment containing the Nod
 
 ## 🧪 Running Automated Tests
 
-We leverage the modern **native Node.js test runner** which executes tests with lightning-fast speeds and zero bloated libraries.
+We leverage the modern **native Node.js test runner** which executes tests with lightning-fast speeds and zero external testing frameworks.
 
-To run integration testing for API endpoints, JSON formats, health status probes, and Prometheus scraper structures:
+To run the server startup and health probe diagnostics checks:
 
 ```bash
 npm test
 ```
-
----
-
-## 📊 Scraping Metrics with Prometheus
-
-When launching using `docker compose`, the Prometheus scraper will automatically scrape the application's `/metrics` endpoint every **5 seconds**.
-
-You can navigate to the [Prometheus Query Dashboard](http://localhost:9090) and search for the following custom metrics:
-
-- `node_uptime_seconds`: Tracking the process life duration.
-- `node_memory_usage_bytes`: Track rss, heapTotal, heapUsed, and external memory metrics. Filter by type using `{type="heapUsed"}`.
-- `tasks_total`: Total DevOps tasks categorized by their sprint progress. Filter using `{status="in-progress"}` or `{status="completed"}`.
-- `http_requests_total`: Tracks the total number of HTTP requests processed by the server. Allows querying query count details like:
-  ```promql
-  sum(http_requests_total) by (path, method, status)
-  ```
 
 ---
 
